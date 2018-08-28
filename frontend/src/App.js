@@ -26,7 +26,6 @@ class App extends Component {
         <input type="text" id="register-password2" />
     </label>
     <input type="submit" value="Create User" />
-    <div>test-urosh</div>
     </form>
       </div>
     );
