@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,14 +7,10 @@
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.5"
   },
-  "frontend-install": "npm install --prefix frontend",
-  "frontend": "npm start --prefix frontend",
-  "dev": "concurrently \"npm run server\" \"npm run frontend\"",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "proxy": "http://localhost:5000/"
+  }
 }
