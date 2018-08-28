@@ -31,14 +31,28 @@ router.post('/register', (req, res) => {
                     //   if (err) throw err;
                       newUser.password = hash;
                       newUser.save()
-                        .then(user => res.json(user))
-                        .catch(err => console.log(err));
+                        .then(user =>  {
+                            const payload = {id: user.id, name:user.name};
+                            jsonwebtoken.sign(
+                                payload,
+                                keys.secretOrKey,
+                                // Tell the key to expire in one hour
+                                { expiresIn: 3600 },
+                                (err, token) => {
+                                    res.json({
+                                        success: true,
+                                        token: 'Bearer ' + token
+                                    });
+                                });
+                        })
                     })
-                  })
-        
+                })
             }
-     })
-})
+        })
+    })
+        
+                
+         
 
 router.post('/login', (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);
@@ -46,7 +60,7 @@ router.post('/login', (req, res) => {
     if(!isValid) {
         return res.status(400).json(errors);
     }
-    
+
     const email = req.body.email;
     const password = req.body.password;
   
@@ -88,4 +102,3 @@ router.post('/login', (req, res) => {
   })
 
 module.exports = router;
-
